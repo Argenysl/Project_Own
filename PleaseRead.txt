@@ -1,0 +1,4 @@
+The ID and passwork for the app is inside its own program.
+
+user: UNO
+password: Omaha.402!
