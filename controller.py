@@ -5,6 +5,12 @@ import csv
 
 class Controller(QMainWindow, Ui_MainWindow):
     def __init__(self, *arg, **kwargs):
+        """
+        This is the init function.
+        it retrieves the ui class from all the windows
+
+        """
+
         super().__init__(*arg, **kwargs)
         self.setupUi(self)
         self.Enter_button.clicked.connect(self.open_EmployeeInformation)
@@ -22,6 +28,10 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.ui_Continue = Ui_Continue()
 
     def open_EmployeeInformation(self):
+        """
+        This function asks for logic credentials in order to open EmployeeInformation window.
+        :return: If the ID and password is correct it will open EmployeeInformation. If incorrect it will display an error label.
+        """
         if self.ID_input.text() == 'UNO' and self.Password_input.text() == 'Omaha.402!':
             self.ui_EmployeeInformation.setupUi(self.window)
             self.window.show()
@@ -34,6 +44,11 @@ class Controller(QMainWindow, Ui_MainWindow):
             self.Error_Label.setText('Password or ID is incorrect')
 
     def information_check(self):
+        """
+
+        :return: It will open a different window asking to confirm the information if it was all entered.
+        if some information is missing error labels will display
+        """
         name = self.ui_EmployeeInformation.FirstName_input.text()
         last_name = self.ui_EmployeeInformation.LastName_Input.text()
         ssn = self.ui_EmployeeInformation.SSN_Input.text()
@@ -57,6 +72,9 @@ class Controller(QMainWindow, Ui_MainWindow):
                 self.ui_Confirmation.Confirm_Button.clicked.connect(self.information)
 
     def information(self):
+        """
+        If the confirmation window was confirmed, this function will save all the information in a csv file.
+        """
         name = self.ui_EmployeeInformation.FirstName_input.text()
         middle_name = self.ui_EmployeeInformation.MiddleName_Input.text()
         last_name = self.ui_EmployeeInformation.LastName_Input.text()
@@ -82,18 +100,31 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.ui_Continue.New_Button.clicked.connect(self.new)
 
     def new(self):
+        """
+        This function closes all other windows and only leaves the main menu in order to enter the credential again.
+        :return: If ID and password correct, again, it will open EmployeeInformation.
+        """
         self.window_3.close()
         self.window_2.close()
         self.window.close()
         self.Error_Label.setText("Enter Credentials to Continue")
 
     def exit_window(self):
+        """
+        :return: Closes EmployeeInformation
+        """
         self.window.close()
 
     def exit_window_2(self):
+        """
+        :return: Function closes the confirmation window in order to go back.
+        """
         self.window_2.close()
 
     def exit_program(self):
+        """
+        :return: exits the whole program.
+        """
         self.window.close()
         self.window_2.close()
         self.window_3.close()
